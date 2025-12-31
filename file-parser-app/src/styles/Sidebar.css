@@ -1,0 +1,76 @@
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  padding: 24px 18px;
+  background: #ffffff;
+  color: #6f688f;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Section wrapper */
+.section {
+  margin-bottom: 28px;
+  position: relative;
+  padding-left: 14px;
+}
+
+/* Vertical line */
+.section::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.25),
+    rgba(255,255,255,0.05)
+  );
+}
+
+/* Section title */
+.section-title {
+  font-size: 13px;
+  color: #8f86b8;
+  margin-bottom: 12px;
+}
+
+/* Items */
+.section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Item */
+.section-items span {
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cfc6e3;
+  transform-origin: left center;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.section-items span:hover {
+  color: #ffffff;
+  transform: scale(1.3);
+}
+
+/* Active item */
+.section-items .active {
+  color: #ffffff;
+}
+
+/* Muted section */
+.section-items.muted span {
+  color: #6f688f;
+}
+
+.section-items.muted span:hover {
+  color: #a39dd4;
+}
