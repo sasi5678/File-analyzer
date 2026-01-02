@@ -8,7 +8,7 @@ import "../styles/Login.css";
 
 const strengthLabels = ["weak", "medium", "medium", "strong"];
 
-const PasswordStrength = ({ onChange }) => {
+const PasswordStrength = ({ onChange, error,isLogin }) => {
   const [strength, setStrength] = useState("");
 
   const getStrength = (password) => {
@@ -40,13 +40,35 @@ const PasswordStrength = ({ onChange }) => {
         <label>Password</label>
       </div>
 
-      <div className={`bars ${strength}`}>
-        <div></div>
-      </div>
+      
 
-      <div className="strength">
-        {strength && `${strength} password`}
-      </div>
+      {
+
+          isLogin ? (
+            <>
+
+            {
+                error ? ( <p  style={{ color: "red", textAlign: "left",}}> {error}</p> ) : 
+                (<p  className= 'error-box' style={{ color: "var(--color-muted)", textAlign: "left",}}> Enter a valid user and password</p>)
+                }
+             
+            </>
+
+          )
+          :
+          (
+          <>
+            <div className={`bars ${strength}`}>
+              <div></div>
+            </div>
+            <div className="strength">
+                {strength && `${strength} password`}
+            </div>
+          </>
+          )
+
+      }
+      
     </>
   );
 };
@@ -54,9 +76,11 @@ const PasswordStrength = ({ onChange }) => {
 const AuthPage = () => {
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(false); // toggle
+  const [isLogin, setIsLogin] = useState(false); 
+  const [error,setError] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,32 +98,72 @@ const AuthPage = () => {
       alert(isLogin ? "Login successful" : "Registration successful");
       navigate("/main");
     } catch (err) {
-      alert(isLogin ? "Login failed" : "Registration failed");
+      setError(() => "Invalid Username or Password.")
     }
   };
 
   return (
-    <section className="page password-strength-2-page">
+    <section className="page password-strength-page">
       <img src={blob} className="blob" />
       <div className="orbit"></div>
 
       <div className="card">
         <img src={logo} />
         <h2>{isLogin ? "Welcome Back" : "Create Account"}</h2>
-        <h3>{isLogin ? "Login to continue" : "Secure your account"}</h3>
 
         <form onSubmit={handleSubmit}>
-          <div className="textbox">
-            <input
-              type="text"
-              required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label>Username</label>
-          </div>
+          
+          
+          {
+            isLogin ? (
 
-          <PasswordStrength onChange={setPassword} />
+          <>
+              <div className="textbox">
+                <input
+                  type="text"
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <label>Username</label>
+               </div>
+
+                <PasswordStrength onChange={setPassword} error={error} isLogin={isLogin}/>
+          
+          </>
+            )
+            : 
+            (
+          <>
+               <div className="textbox">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <label>email</label>
+              </div>
+
+              <div className="textbox">
+                <input
+                  type="text"
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <label>Username</label>
+            </div>
+         
+
+          <PasswordStrength onChange={setPassword} error={error} isLogin={isLogin}/>
+          
+           </>
+            )
+          }
+          
+          
+          
 
           <button type="submit">
             {isLogin ? "Login" : "Sign Up"}
