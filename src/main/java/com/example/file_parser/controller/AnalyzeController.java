@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.file_parser.dto.ProjectMetadataDTO;
 import com.example.file_parser.service.AnalyzeService;
 
 
@@ -24,8 +25,10 @@ public class AnalyzeController {
     }
 
     @PostMapping
-    public Object analyze(@RequestParam("file") MultipartFile file) throws Exception {
-        return analyzeService.analyze(file);
+    public ProjectMetadataDTO analyze(
+            @RequestParam("file") MultipartFile file
+    ) throws Exception {
+        return analyzeService.process(file);
     }
 }
 

@@ -1,79 +1,50 @@
 package com.example.file_parser.service;
 
-import java.io.File;
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.file_parser.analyzer.AnalyzerFactory;
-import com.example.file_parser.analyzer.CodeAnalyzer;
-import com.example.file_parser.dto.FileAnalysisDTO;
-import com.example.file_parser.dto.ProjectDTO;
-import com.example.file_parser.util.FileUtils;
+import com.example.file_parser.dto.FileMetadataDTO;
+import com.example.file_parser.dto.ProjectMetadataDTO;
 
 @Service
 public class AnalyzeService {
 
-    private final AnalyzerFactory factory;
+    private final ZipService zipService;
+    private final LanguageRouter router;
 
-    public AnalyzeService(AnalyzerFactory factory) {
-        this.factory = factory;
+    public AnalyzeService(ZipService zipService, LanguageRouter router) {
+        this.zipService = zipService;
+        this.router = router;
     }
 
-    public Object analyze(MultipartFile file) throws Exception {
+    public ProjectMetadataDTO process(MultipartFile file) throws Exception {
 
-        File temp = FileUtils.convertToFile(file);
+        List<Path> files;
 
-        if (temp.getName().endsWith(".zip")) {
-            File extractedFolder = FileUtils.unzip(temp);
-            return analyzeFolder(extractedFolder);
+        if (file.getOriginalFilename().endsWith(".zip")) {
+            files = zipService.extractZip(file);
+        } else {
+            Path temp = Files.createTempFile("single-", file.getOriginalFilename());
+            Files.copy(file.getInputStream(), temp, StandardCopyOption.REPLACE_EXISTING);
+            files = List.of(temp);
         }
 
-        CodeAnalyzer analyzer = factory.getAnalyzer(temp.getName());
-        return analyzer.analyzeFile(temp);
-    }
+        ProjectMetadataDTO project = new ProjectMetadataDTO();
 
-
-    private ProjectDTO analyzeFolder(File root) throws Exception {
-
-        ProjectDTO project = new ProjectDTO();
-        project.classes = new ArrayList<>();
-        project.totalFiles = 0;
-
-        Files.walk(root.toPath())
-                .filter(Files::isRegularFile)
-                .forEach(path -> {
-                    try {
-                        String fileName = path.getFileName().toString();
-
-                        CodeAnalyzer analyzer =
-                                factory.getAnalyzer(fileName);
-
-                        FileAnalysisDTO result =
-                                analyzer.analyzeFile(path.toFile());
-
-                        project.classes.addAll(result.classes);
-                        project.totalFiles++;
-
-                    } catch (Exception e) {
-                        System.out.println("Skipping file: " + path.getFileName());
-                    }
-                    
-                    
-					
-
-                    
-
-                    
-
-                });
-        
-        
-
+        for (Path path : files) {
+            FileMetadataDTO metadata = router.analyze(path);
+            if (metadata != null) {
+                project.files.add(metadata);
+                project.totalFiles++;
+                project.totalLines += metadata.totalLines;
+            }
+        }
 
         return project;
     }
 }
-
