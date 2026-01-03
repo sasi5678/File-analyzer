@@ -1,52 +1,77 @@
 import "../styles/Sidebar.css";
-import {
-  FaPalette,
-  FaShapes,
-  FaCube
-} from "react-icons/fa";
+import { FiHome, 
+  FiFolder, 
+  FiClock, 
+  FiTable , 
+  FiFileText, 
+  FiGrid,
+  FiMoon, 
+  FiShield,
+  FiMenu ,
+  FiAlignJustify  } from "react-icons/fi";
 
+
+const menuItems = [
+  {
+    title: "Get Started",
+    items: [
+      { label: "Home", icon: FiHome },
+      { label: "Upload", icon: FiFolder },
+      { label: "History", icon: FiClock }
+    ]
+  },
+  {
+    title: "Analytics",
+    items: [
+      { label: "Dashboard", icon: FiGrid },
+      { label: "Tables", icon: FiTable },
+      { label: "Summary", icon: FiFileText }
+    ]
+  },
+  {
+    title: "Others",
+    items: [
+      { label: "Admin", icon: FiShield },
+      { label: "Dark", icon: FiMoon }
+    ]
+  }
+];
 const Sidebar = () => {
   return (
-    <aside className="sidebar">
-      {/* Get Started */}
-      <div className="section">
-        <p className="section-title">Get Started</p>
-        <div className="section-items">
-          <span className="active">Introduction</span>
-          <span>Installation</span>
-          <span>MCP</span>
-          <span>Index</span>
-        </div>
+    <aside className="sidebar-page">
+
+      <div className="head">
+        <span></span>
       </div>
 
-      {/* Tools */}
-      <div className="section">
-        <p className="section-title">Tools</p>
-        <div className="section-items">
-          <span>
-            <FaPalette /> Background Studio
-          </span>
-          <span>
-            <FaShapes /> Shape Magic
-          </span>
-          <span>
-            <FaCube /> Texture Lab
-          </span>
-        </div>
-      </div>
 
-      {/* Text Animations */}
-      <div className="section">
-        <p className="section-title">Text Animations</p>
-        <div className="section-items muted">
-          <span>Split Text</span>
-          <span>Blur Text</span>
-          <span>Circular Text</span>
-          <span>Text Type</span>
-        </div>
-      </div>
-    </aside>
+      {
+        menuItems.map( (section, sIndex) => (
+          <div className="section" key={sIndex}>
+           <p className="section-title"> {section.title}</p>
+
+           {
+            section.items.map((item, i) => {
+
+              const Icon = item.icon;
+
+              return(
+                <div className="section-items" key={i}>
+                <Icon style={{height: '13px', color: '#b19ef0'}}/>
+                <span>{item.label}</span>
+                </div>
+                )
+              })}
+            </div> 
+        ))}   
+            
+  
+        </aside>
   );
-};
+}; 
+        
+
+      
+   
 
 export default Sidebar;

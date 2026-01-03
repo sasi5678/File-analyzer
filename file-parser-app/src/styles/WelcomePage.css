@@ -1,0 +1,104 @@
+.welcome-page{
+    position: absolute;
+    top: 0;
+    inset: 0;
+}
+
+.navigation-bar{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.navigation-container{
+    background-color: #ffffff18;
+    height: 60px;
+    padding: 20px;
+    width: 80vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    margin-bottom: 140px;
+}
+
+
+.navigation-head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.navigation-head img{
+    filter: invert(1);
+    height: 40px;
+    width: 30px;
+}
+
+.navigation-head span{
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+.navigation-item span{
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.navigation-item{
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.navigation-item span:hover{
+    transform: scale(0.85);
+}
+
+.navigation-item span:active{
+    transform: scale(0.85);
+}
+
+.main-content h1{
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.main-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.btn-box{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-box button:nth-child(1){
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+
+}
+
+.btn-box button:nth-child(2){
+    padding: 10px 20px;
+    border-radius: 50px;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: #ffffff18;
+    font-weight: 600;
+    color: var(--color-secondary-text);
+}

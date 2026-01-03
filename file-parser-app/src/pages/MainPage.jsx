@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import Dashboard from "../pages/Dashboard"; // note: Dashboard is in pages/
+import Dashboard from "../pages/Dashboard"; 
 import "../styles/Dashboard.css";
+import Home from "./Home";
+import Sidebar from "../components/Sidebar";
+  
+
 
 const MainPage = () => {
   const [analysisData, setAnalysisData] = useState(null);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // restore from localStorage if present
-    const stored = localStorage.getItem("analysisData");
-    if (stored) setAnalysisData(JSON.parse(stored));
-  }, []);
-
-  const handleAnalysisResult = (data) => {
-    setAnalysisData(data);
-    try {
-      localStorage.setItem("analysisData", JSON.stringify(data));
-    } catch (e) {}
-  };
+  
 
   return (
     <div>
-      <Navbar onAnalysisResult={handleAnalysisResult} setLoading={setLoading} />
-      <main style={{ padding: 24 }}>
-        <Dashboard analysisData={analysisData} loading={loading} />
-      </main>
+      <Navbar />
+      <Sidebar />
+      <Home onAnalyze={setAnalysisData}  />
+     
+        <main >
+          {
+            analysisData && <Dashboard data={analysisData}  />
+          }
+        </main>
     </div>
   );
 };

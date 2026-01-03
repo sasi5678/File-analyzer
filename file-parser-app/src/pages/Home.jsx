@@ -1,33 +1,52 @@
-import { Link } from "react-router-dom";
-import "../styles/Home.css"
-const Home = () => {
+import axios from 'axios';
+import '../styles/Home.css'
+
+const Home = ({onAnalyze}) => {
+
+  const name = localStorage.getItem('username')
+
+  const handleUpload = async (e) => {
+      const file = e.target.files[0];
+
+      if(!file) return;
+
+      const formData = new FormData();
+      formData.append("file",file)
+
+      const res = await axios.post(
+        'http://localhost:8080/analyze',
+        formData
+      );
+      console.log(res.data)
+      onAnalyze?.(res.data)
+  }
+
   return (
-    <main className='home-page'>
+    <div className='home-page'>
+      
       <div className='head-text'>
-        <h2 >WELCOME    TO</h2><br/>
-        <h2>FILE  ANALYZER</h2>
+        <h2>Hello,{name}</h2>
       </div>
 
-      <p>Register or Login Account</p>
-      
-      <div className='btn-box'>
-            
-            <Link to="/register">
-              <button >
-                  Register
-              </button>
-            </Link>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias incidunt laudantium omnis veniam, placeat odio iure ullam fugit</p>
 
-             <Link to="/login">
-                <button className='login-btn'>
-                    Login
-                </button>
 
-             </Link>
-            
+      <div className='upload-box'>
+          <input
+            type='file'
+            accept='.zip'
+            id = 'upload-file'
+            onChange={handleUpload}
+            hidden
+          />
+
+          <label htmlFor='upload-file' >Upload File</label>
+
       </div>
       
-    </main>
+
+
+    </div>
   )
 }
 

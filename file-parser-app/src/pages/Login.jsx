@@ -82,6 +82,9 @@ const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(false); 
   const [error,setError] = useState("")
 
+
+  localStorage.setItem("username", username);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

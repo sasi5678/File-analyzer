@@ -1,35 +1,67 @@
 import React from "react";
 import { AreaChart, Area, ResponsiveContainer } from "recharts";
 
-const defaultData = [
-  { month: "Jan", value: 1500 },
-  { month: "Feb", value: 1800 },
-  { month: "Mar", value: 1200 },
-  { month: "Apr", value: 4800 },
-  { month: "May", value: 2000 },
-  { month: "Jun", value: 6000 },
-  { month: "Jul", value: 2200 },
-  { month: "Aug", value: 5500 },
-  { month: "Sep", value: 2300 },
-  { month: "Oct", value: 3800 },
-  { month: "Nov", value: 1500 },
-  { month: "Dec", value: 2600 },
-];
+const OverviewChart = ({ analysisData }) => {
 
-const OverviewChart = ({ data }) => {
-  const chartData = data ?? defaultData;
+  
+  if (
+    !analysisData ||
+    !Array.isArray(analysisData.files) ||
+    analysisData.files.length === 0
+  ) {
+    return <p>No analysis data available</p>;
+  }
+
+  const isSingleFile = analysisData.totalFiles === 1;
+
+  let chartData = [];
+
+  if (isSingleFile) {
+    const file = analysisData.files[0];
+
+    chartData = [
+      { name: "Total Lines", value: file.totalLines ?? 0 },
+      { name: "Lines of Code", value: file.linesOfCode ?? 0 },
+      { name: "Comment Lines", value: file.commentLines ?? 0 },
+      { name: "APIs", value: file.apis?.length ?? 0 },
+    ];
+  } else {
+    const totalApis = analysisData.files.reduce(
+      (sum, f) => sum + (f.apis?.length ?? 0),
+      0
+    );
+
+    const totalClasses = analysisData.files.reduce(
+      (sum, f) => sum + (f.classes?.length ?? 0),
+      0
+    );
+
+    chartData = [
+      { name: "Files", value: analysisData.totalFiles ?? 0 },
+      { name: "Total Lines", value: analysisData.totalLines ?? 0 },
+      { name: "APIs", value: totalApis },
+      { name: "Classes", value: totalClasses },
+    ];
+  }
+
   return (
-    <div style={{ width: "100%", height: 300 }}>
+    <div style={{ width: "100%", height: 260 }}>
       <ResponsiveContainer>
         <AreaChart data={chartData}>
           <defs>
-            <linearGradient id="areaBlue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4f7cff" stopOpacity={0.6} />
-              <stop offset="95%" stopColor="#4f7cff" stopOpacity={0} />
+            <linearGradient id="overviewGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#4f7cff" stopOpacity={0.6} />
+              <stop offset="100%" stopColor="#4f7cff" stopOpacity={0} />
             </linearGradient>
           </defs>
 
-          <Area type="monotone" dataKey="value" stroke="#4f7cff" strokeWidth={3} fill="url(#areaBlue)" />
+          <Area
+            type="monotone"
+            dataKey="value"
+            stroke="#4f7cff"
+            strokeWidth={3}
+            fill="url(#overviewGradient)"
+          />
         </AreaChart>
       </ResponsiveContainer>
     </div>
