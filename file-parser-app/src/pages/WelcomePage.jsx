@@ -1,10 +1,17 @@
 import React from 'react'
+
+import { useNavigate } from 'react-router-dom'
+
 import Aurora from '../components/Aurora'
 import '../styles/WelcomePage.css'
 import Navbar from '../components/Navbar'
 import webLogo from '../assets/web-logo.svg'
 
+
 const WelcomePage = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
       <Aurora 
@@ -22,7 +29,7 @@ const WelcomePage = () => {
                         </div>
                         <div className="navigation-item">
                             <span>Home</span>
-                            <span>Registration</span>
+                            <span data-testid="welcome-registration-btn" onClick={() => navigate("/register")} >Registration</span>
                         </div>
                     </div>
 
@@ -34,7 +41,7 @@ const WelcomePage = () => {
                 </div>
 
                 <div className="btn-box">
-                    <button> Get Started</button>
+                    <button data-testid="welcome-get-started-btn" onClick={() => navigate("/register")} > Get Started</button>
                     <button> Learn More</button>                    
                 </div>
 

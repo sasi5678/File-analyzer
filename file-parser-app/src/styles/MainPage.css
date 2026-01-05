@@ -1,46 +1,56 @@
-
-.analytic-box{
-    background-color: #f9fafb;
+/* Full app */
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at top, #120a2a, #090511 60%);
+  color: white;
 }
 
-
-.grid-box{
-    display: grid;
-    grid-template-columns: 2fr 1fr ;
-    padding: 20px;
+/* Navbar */
+.navbar {
+  height: 64px;
+  flex-shrink: 0;
 }
 
-.table-box{
-    padding: 20px;
-    margin: 20px 10px ; 
-    border-radius: 10px;
-    grid-column: 2/3;
-    grid-row: 1/3;
+/* Body below navbar */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden; /* 🔥 KEY */
 }
 
-.bar-box{
-    padding: 10px 40px  10px  0px ;
-    width: 300px;
-    margin: 20px 10px ; 
-    border-radius: 10px;
-    box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  padding: 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
 }
 
-.bar-box p{
-    color: rgba(26, 24, 24, 0.685);
-    font-weight: 600;
-    padding: 20px 30px;
+/* ONLY THIS SCROLLS */
+.main {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto; /* 🔥 KEY */
 }
 
-.line-box{
-    padding: 20px;
-    margin: 20px 10px ; 
-    box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
-    border-radius: 10px;
-    
+/* Sidebar items */
+.sidebar div {
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.sidebar div.active {
+  background: rgba(138, 99, 255, 0.15);
+  color: #cbbcff;
+}
+
+.table-heading{
+  font-weight: 600;
+  font-size: 3rem;
+  margin-bottom: 20px;
 }

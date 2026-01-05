@@ -12,8 +12,12 @@ import WelcomePage from "./pages/WelcomePage.jsx";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<><MainPage/></>} />
+      <Route path="/" element={<><WelcomePage/></>} />
       <Route path="/main" element={<MainPage />} />
+      <Route path="/register" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -6,6 +6,7 @@ const Home = ({onAnalyze}) => {
   const name = localStorage.getItem('username')
 
   const handleUpload = async (e) => {
+
       const file = e.target.files[0];
 
       if(!file) return;
@@ -25,22 +26,30 @@ const Home = ({onAnalyze}) => {
     <div className='home-page'>
       
       <div className='head-text'>
-        <h2>Hello,{name}</h2>
+        <h1>Hello,<span>{name}</span></h1>
+        <h1>Upload your file to Know</h1>
       </div>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias incidunt laudantium omnis veniam, placeat odio iure ullam fugit</p>
+      <p>Upload projects and analyze files, APIs, and structure visually </p>
 
 
-      <div className='upload-box'>
+      <div className='upload-box' >
           <input
             type='file'
             accept='.zip'
             id = 'upload-file'
             onChange={handleUpload}
-            hidden
+             style={{ opacity: 0, position: "absolute", left: "-9999px" }}
+            
           />
 
-          <label htmlFor='upload-file' >Upload File</label>
+           <button
+              onClick={() =>
+                document.getElementById("upload-file").click()
+              }
+            >
+        Upload File
+      </button>
 
       </div>
       

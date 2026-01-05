@@ -1,20 +1,24 @@
 .card-box{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 30px;
   border: 1px solid var(--color-primary-border);
-  border-radius: 10px;
+  background: #160d26;
+  border-radius: 25px;
 }
 
 .card{
-  text-align: center;
+  text-align: left;
+  width: auto;
+  white-space: nowrap;
 }
 
-.card-title{
+.card-title {
+  margin:13px 0 0 13px;
+}
+.card-title p{
   font-size: 1rem;
   font-weight: 500;
-  color: var(--color-title);
+  color: white;
   
 }
 
@@ -24,6 +28,17 @@
 
 .card-value{
   font-size: 1rem;
+  margin: 0 0 10px 13px ;
   font-weight: 400;
   color: var(--color-secondary-text);
+}
+
+.summary-content{
+  margin: 8px;
+  border-radius: 25px;
+  background:  #04000a;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

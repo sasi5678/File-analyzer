@@ -16,7 +16,6 @@ const menuItems = [
     title: "Get Started",
     items: [
       { label: "Home", icon: FiHome },
-      { label: "Upload", icon: FiFolder },
       { label: "History", icon: FiClock }
     ]
   },
@@ -24,8 +23,8 @@ const menuItems = [
     title: "Analytics",
     items: [
       { label: "Dashboard", icon: FiGrid },
-      { label: "Tables", icon: FiTable },
-      { label: "Summary", icon: FiFileText }
+      { label: "Table", icon: FiTable },
+      { label: "Graph", icon: FiFileText }
     ]
   },
   {
@@ -36,13 +35,11 @@ const menuItems = [
     ]
   }
 ];
-const Sidebar = () => {
+const Sidebar = ({ activeView, onSelect }) => {
   return (
     <aside className="sidebar-page">
 
-      <div className="head">
-        <span></span>
-      </div>
+      
 
 
       {
@@ -54,11 +51,15 @@ const Sidebar = () => {
             section.items.map((item, i) => {
 
               const Icon = item.icon;
+              const isActive = activeView === item.label.toLowerCase();
 
               return(
-                <div className="section-items" key={i}>
+                <div key={i}
+                    className={`section-items ${isActive ? "active" : ""}`}
+                    onClick={() => onSelect(item.label.toLowerCase())}
+                >
                 <Icon style={{height: '13px', color: '#b19ef0'}}/>
-                <span>{item.label}</span>
+                <span >{item.label}</span>
                 </div>
                 )
               })}

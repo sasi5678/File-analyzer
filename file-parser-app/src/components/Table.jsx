@@ -14,25 +14,36 @@ const Table = ({ data }) => {
   
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Class Name</th>
-          <th>Method</th>
-          <th>URL</th>
-        </tr>
-      </thead>
 
-      <tbody>
-        {rows.map((row, index) => (
-          <tr key={index}>
-            <td>{row.className}</td>
-            <td>{row.method}</td>
-            <td>{row.url}</td>
+    <>
+    <div className="table-wrapper">
+      <table className="table" >
+        <thead>
+          <tr>
+            <th>Class Name</th>
+            <th>Method</th>
+            <th>URL</th>
           </tr>
-        ))}
-      </tbody>
+        </thead>
+
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={index}>
+              <td>{row.className}</td>
+              <td><span>{row.method}</span></td>
+              <td>{row.url}</td>
+            </tr>
+          ))}
+        </tbody>
     </table>
+
+
+    </div>
+    
+    
+    </>
+    
+    
   );
 };
 

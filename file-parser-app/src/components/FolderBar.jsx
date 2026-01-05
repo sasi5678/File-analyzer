@@ -10,18 +10,76 @@ const FolderBar = ({ files }) => {
     lines: file.totalLines
   }));
 
+
+  const WrappedTick = ({ x, y, payload }) => {
+    const words = payload.value.split(/[_\- ]/); // split filename nicely
+    const lineHeight = 12;
+
+    return (
+      <g transform={`translate(${x},${y + 10})`}>
+        {words.map((word, index) => (
+          <text
+            key={index}
+            x={0}
+            y={index * lineHeight}
+            textAnchor="middle"
+            fill="#9ca3af"
+            fontSize={11}
+          >
+            {word}
+          </text>
+        ))}
+      </g>
+    );
+  };
+
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div
+          style={{
+            background: "var(--color-border)",
+            border: "1px solid #3d3257c2",
+            padding: "8px 12px",
+            borderRadius: "8px",
+            color: "#fff",
+            fontSize: "14px",
+            fontWeight: 600
+          }}
+        >
+          lines : {payload[0].value}
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
-        <XAxis dataKey="name" hide />
-        <Tooltip />
+      <BarChart
+        width={data.length * 70}   // 🔥 dynamic width for scroll
+        height={350}
+        data={data}
+        barCategoryGap={24}        // 🔥 gap between categories
+        barGap={8}                 // 🔥 gap between bars
+      >
+        <XAxis
+          dataKey="name"
+          interval={0}
+          height={40}
+          tick={<WrappedTick />}
+          tickLine={false}
+          axisLine={{ stroke: "#2a2a35" }}
+        />
+
+        <Tooltip cursor={false} content={<CustomTooltip />} />
+
         <Bar
-          dataKey="lines"
-          fill="#0ea5e9"
-          radius={[6, 6, 0, 0]}
+          dataKey="lines"          // ✅ FIXED
+          barSize={22}             // 🔥 slimmer bars
+          fill="var(--color-button)"
+          radius={[12, 12, 0, 0]}
         />
       </BarChart>
-    </ResponsiveContainer>
   );
 };
 

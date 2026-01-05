@@ -33,6 +33,7 @@ const PasswordStrength = ({ onChange, error,isLogin }) => {
     <>
       <div className="textbox">
         <input
+          id="password"
           type="password"
           required
           onChange={handleChange}
@@ -48,7 +49,7 @@ const PasswordStrength = ({ onChange, error,isLogin }) => {
             <>
 
             {
-                error ? ( <p  style={{ color: "red", textAlign: "left",}}> {error}</p> ) : 
+                error ? ( <p id='login-error' className= 'error-box' style={{ color: "red", textAlign: "left",}}> {error}</p> ) : 
                 (<p  className= 'error-box' style={{ color: "var(--color-muted)", textAlign: "left",}}> Enter a valid user and password</p>)
                 }
              
@@ -83,8 +84,7 @@ const AuthPage = () => {
   const [error,setError] = useState("")
 
 
-  localStorage.setItem("username", username);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -93,14 +93,21 @@ const AuthPage = () => {
       : "http://localhost:8080/api/auth/register";
 
     try {
-      await axios.post(url, {
-        username,
-        password
-      });
+
+       const payload = isLogin
+      ? { username, password }               // LOGIN
+      : { email, username, password };  
+
+      await axios.post(url, payload);
+
+      localStorage.setItem("username", username);
 
       alert(isLogin ? "Login successful" : "Registration successful");
       navigate("/main");
     } catch (err) {
+
+      isLogin ?  "" : alert("Username already exists");
+      
       setError(() => "Invalid Username or Password.")
     }
   };
@@ -125,6 +132,7 @@ const AuthPage = () => {
                 <input
                   type="text"
                   required
+                  id="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -142,6 +150,7 @@ const AuthPage = () => {
                   <input
                     type="email"
                     required
+                    id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -151,6 +160,7 @@ const AuthPage = () => {
               <div className="textbox">
                 <input
                   type="text"
+                  id="username"
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -168,7 +178,7 @@ const AuthPage = () => {
           
           
 
-          <button type="submit">
+          <button id='login-btn' type="submit">
             {isLogin ? "Login" : "Sign Up"}
           </button>
           
@@ -181,7 +191,7 @@ const AuthPage = () => {
           ) : (
             <>
               Already have an account?{" "}
-              <a onClick={() => setIsLogin(true)}>Login</a>
+              <a id="go-login" onClick={() => setIsLogin(true)}>Login</a>
             </>
           )}
         </p>

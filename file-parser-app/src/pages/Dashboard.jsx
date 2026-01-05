@@ -21,14 +21,34 @@ const Dashboard = ({ data }) => {
 
 
   return (
-    <main className="dashboard">
-      <div style={{ display: "flex", gap: "20px" }}>
-      <Card title="Total Files" value={data.totalFiles} />
-      <Card title="Total Lines" value={data.totalLines} />
-      <Card title="Total APIs" value={totalApis} />
-      <OverviewChart analysisData={data}/>
-    </div>
+  
+  <>
+  
+    <h1 className="title-text"> Dashboard </h1>
+    <main data-testid="dashboard-loaded" className="dashboard">
+
+        
+     
+        <div className="card-box-1" >
+            <Card title="Total Files" value={data.totalFiles} />
+        </div>
+
+        <div className="card-box-2" >
+            <Card title="Total Lines" value={data.totalLines} />
+        </div>
+
+        <div className="card-box-3" >
+            <Card title="Total APIs" value={totalApis} />
+        </div>
+    
+        <div className="table-box">
+           <Table data={data}/>
+        </div>
+
+
+    
     <div className="bar-chart">
+      <h2 style={{ color: 'var(--color-title)', padding: '20px 22px'}}> Number of Lines</h2>
       { isSingleFile ? (
             <SingleFileBar file={files[0]} />
           ) : (
@@ -37,7 +57,10 @@ const Dashboard = ({ data }) => {
       
     </div>
 
+    
      <div className="graph-chart">
+      <h2 style={{ color: 'var(--color-title)', padding: '20px 28px'}}>Graph</h2>
+
       { isSingleFile ? (
             <OverviewChart data={files[0]} />
           ) : (
@@ -46,10 +69,12 @@ const Dashboard = ({ data }) => {
       
     </div>
 
-    <div className="table-stat">
-      <Table data={data}/>
-    </div>
+   
     </main> 
+  
+  
+  </>
+ 
   );
 };
 

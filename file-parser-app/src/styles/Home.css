@@ -1,10 +1,12 @@
-.upload-box label {
+.upload-box button {
   display: inline-block;
-  background-color: var(--color-primary);
-  padding: 10px 15px;
+  background-color: var(--color-button);
+  padding: 15px 30px;
   color: #fff;
-  font-size: 12px;
-  font-weight: 500;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
   border-radius: 50px;
   cursor: pointer;
   position: relative;
@@ -14,11 +16,29 @@
 
 }
 
-.home-page p{
-  margin-bottom: 20px;
+.home-page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 100px 0 0px;
 }
 
-.upload-box label:hover{
+.home-page .head-text {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.home-page .head-text span{
+text-transform: capitalize;
+color: #8a6af5;
+}
+.home-page p{
+  margin: 30px 0;
+  color: var(--color-secondary-text);
+}
+
+.upload-box button:hover{
   transform: scale(1.05);
-  box-shadow: 5px 4px 12px rgba(140, 90, 255, 0.582);
+  box-shadow: 2px 4px 12px rgba(140, 90, 255, 0.582);
 }

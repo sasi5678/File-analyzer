@@ -53,19 +53,19 @@
   align-items: center;
   gap: 8px;
   transform: translateX(0%);
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 /* Hover */
 .section-items span:hover {
   color: #fff;
-  transform: translateX(9%);
+  transform: translateX(12%);
 }
 
 /* Active item */
-.section-items span:active {
+.active span{ 
   color: #fff;
-  transform: translateX(9%);
+  transform: translateX(12%);
 }
 
 

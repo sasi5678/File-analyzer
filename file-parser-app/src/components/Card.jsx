@@ -8,10 +8,16 @@ const Card = ({title, value}) => {
 
     <div className="card-box">
       <div className="card">
-        <div>
-          <p className="card-title"> {title}</p>
+        <div className="card-title">
+          <p > {title}</p>
         </div>
           <h2 className="card-value">{value}</h2>
+        </div>
+
+        <div className="summary-content">
+
+            <p style={{color: "var(--color-title)", fontWeight: "800", fontSize: "2.4rem"}}> {value}</p>
+          
         </div>
       </div>
   );
