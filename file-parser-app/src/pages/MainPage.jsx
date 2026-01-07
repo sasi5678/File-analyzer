@@ -9,6 +9,9 @@ import Table from "../components/Table";
 import FolderBar from "../components/FolderBar";
 import SingleFileBar from "../components/SingleFileBar";
 import OverviewChart from "../components/OverviewChart";
+import { AdminLogin } from "../components/AdminPage";
+import History from "../components/History";
+import ImportsTable from "../components/ImportsTable";
 
 const MainPage = () => {
   const [activeView, setActiveView] = useState("home");
@@ -38,13 +41,25 @@ const MainPage = () => {
 
           {activeView === "dashboard" && analysisData && (<Dashboard data={analysisData} />
         )}
+
+        { 
+          activeView === "admin" && (<AdminLogin/>)
+        }
+
+        {
+          activeView === "import" && (<ImportsTable data={analysisData} />)
+        }
+
+        { 
+          activeView === "history" && (<History />)
+        }
           {activeView === "table" && <>
           <div className="table-box">
               <h1 className="table-heading">Table</h1>
             <Table data={analysisData}/>
             </div>
             </>
-}
+          }
           
           {activeView === "graph" && <div style={{padding: '50px 80px 50px 50px', display: "flex", 
             flexDirection: "column", justifyContent: " space-evenly", gap: "30px"}}>

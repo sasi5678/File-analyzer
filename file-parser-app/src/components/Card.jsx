@@ -11,7 +11,7 @@ const Card = ({title, value}) => {
         <div className="card-title">
           <p > {title}</p>
         </div>
-          <h2 className="card-value">{value}</h2>
+          <h2 className="card-value" >{value}</h2>
         </div>
 
         <div className="summary-content">

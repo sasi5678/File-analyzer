@@ -3,7 +3,11 @@ import '../styles/Home.css'
 
 const Home = ({onAnalyze}) => {
 
+
+
   const name = localStorage.getItem('username')
+
+  const token = localStorage.getItem("token");
 
   const handleUpload = async (e) => {
 
@@ -11,13 +15,23 @@ const Home = ({onAnalyze}) => {
 
       if(!file) return;
 
+       const token = localStorage.getItem("token");
+        console.log("TOKEN:", token);
+
       const formData = new FormData();
       formData.append("file",file)
 
-      const res = await axios.post(
-        'http://localhost:8080/analyze',
-        formData
-      );
+      
+
+     const res = await axios.post(
+          "http://localhost:8080/analyze",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          }
+        );
       console.log(res.data)
       onAnalyze?.(res.data)
   }

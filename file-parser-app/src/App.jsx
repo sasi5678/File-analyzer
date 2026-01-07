@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import WelcomePage from "./pages/WelcomePage.jsx";
+import {AdminPage} from "./components/AdminPage.jsx";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
       <Route path="/main" element={<MainPage />} />
       <Route path="/register" element={<Login />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/admin"element={<AdminPage />} />
+
+
+
 
 
       <Route path="*" element={<Navigate to="/" replace />} />

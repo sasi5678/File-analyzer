@@ -1,0 +1,82 @@
+
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #0b0616;
+  color: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--color-secondary-border);
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+
+.table-wrapper{
+  border: 1px solid var(--color-secondary-border);
+  border-radius: 12px;
+  overflow: hidden; 
+  width: 80%;
+}
+
+.history-table th{
+  padding: 25px 16px;
+  font-weight: 600;
+  width: 10px;
+  font-size: 13px;
+  text-align: left;
+  border: 1px solid var(--color-secondary-border);
+
+}
+
+.history-table td {
+  padding: 25px 16px;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: left;
+  border: 1px solid var(--color-secondary-border);
+
+}
+
+.history-table thead {
+  border: 1px solid var(--color-secondary-border);
+  background: #160d26;
+}
+
+.history-table tr {
+  border: 1px solid var(--color-secondary-border);
+
+}
+
+.history-table tr:last-child {
+  border-bottom: none;
+}
+
+
+/* Class Name */
+.history-table th:nth-child(1),
+.history-table td:nth-child(1) {
+  width: 15%;
+}
+
+/* Method */
+.history-table th:nth-child(2),
+.history-table td:nth-child(2) {
+  width: 15%;
+}
+
+/* URL */
+.history-table th:nth-child(3),
+.history-table td:nth-child(3) {
+  width: 20%;
+}
+
+.history-table td:nth-child(3) span {
+  font-weight: 300;
+  padding: 6px;
+  border-radius: 6px;
+  color: #fff;
+  background-color: var(--color-secondary-border);
+}
+
+

@@ -1,15 +1,13 @@
 import "../styles/Table.css";
 
-const Table = ({ data }) => {
+const ImportsTable = ({ data }) => {
   if (!data || !data.files) return null;
 
-  const rows = data.files.flatMap(file =>
-    file.apis.map(api => ({
-      className: api.className,
-      method: api.httpMethod,
-      url: api.apiUrl
-    }))
-  );
+const rows = data.files.map(file => ({
+  className: file.fileName,
+  imports: file.imports
+}));
+
 
   
 
@@ -22,8 +20,7 @@ const Table = ({ data }) => {
         <thead>
           <tr>
             <th>Class Name</th>
-            <th>Method</th>
-            <th>URL</th>
+            <th>Imports</th>
           </tr>
         </thead>
 
@@ -31,8 +28,7 @@ const Table = ({ data }) => {
           {rows.map((row, index) => (
             <tr key={index}>
               <td>{row.className}</td>
-              <td><span>{row.method}</span></td>
-              <td>{row.url}</td>
+              <td>{row.imports}</td>
             </tr>
           ))}
         </tbody>
@@ -46,4 +42,4 @@ const Table = ({ data }) => {
   );
 };
 
-export default Table;
+export default ImportsTable;

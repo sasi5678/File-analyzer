@@ -98,7 +98,12 @@ const AuthPage = () => {
       ? { username, password }               // LOGIN
       : { email, username, password };  
 
-      await axios.post(url, payload);
+       const res = await axios.post(url, payload);
+
+       console.log("login res: ", res.data)
+
+      localStorage.setItem("token", res.data.token);
+
 
       localStorage.setItem("username", username);
 
@@ -109,8 +114,8 @@ const AuthPage = () => {
       isLogin ?  "" : alert("Username already exists");
       
       setError(() => "Invalid Username or Password.")
-    }
-  };
+  }
+};
 
   return (
     <section className="page password-strength-page">

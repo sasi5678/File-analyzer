@@ -34,30 +34,55 @@ const Navbar = ({data}) => {
       };
 
 
-      const handleDownload = async () => {
+     const handleDownload = async () => {
 
-         const hasValidFiles =
-            Array.isArray(data?.files) &&
-            data.files.some(file => file.totalLines > 0);
+  const hasValidFiles =
+    Array.isArray(data?.files) &&
+    data.files.some(file => file.totalLines > 0);
 
-          if (!hasValidFiles) {
-            alert("File is Empty");
-            return;
-          }
+  if (!hasValidFiles) {
+    alert("File is Empty");
+    return;
+  }
 
-         const res = await axios.get(
-            "http://localhost:8080/analyze/download-report",
-            { responseType: "blob" } //  important
-          );
+  try {
+    const token = localStorage.getItem("token");
 
-          const url = window.URL.createObjectURL(new Blob([res.data]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "file-report.pdf");
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-    };
+    if (!token) {
+      alert("Session expired. Please login again.");
+      navigate("/login");
+      return;
+    }
+
+    const res = await axios.get(
+      "http://localhost:8080/analyze/download-report",
+      {
+        responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    // force browser download
+    const url = window.URL.createObjectURL(
+      new Blob([res.data], { type: "application/pdf" })
+    );
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "file-report.pdf");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+
+  } catch (err) {
+    console.error("Download failed:", err);
+    alert("Download failed. Please try again.");
+  }
+};
+
 
   return (
 

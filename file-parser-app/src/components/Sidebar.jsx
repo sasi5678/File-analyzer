@@ -24,7 +24,8 @@ const menuItems = [
     items: [
       { label: "Dashboard", icon: FiGrid },
       { label: "Table", icon: FiTable },
-      { label: "Graph", icon: FiFileText }
+      { label: "Graph", icon: FiFileText },
+      { label: "Import", icon: FiTable}
     ]
   },
   {
