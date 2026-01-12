@@ -12,6 +12,7 @@ import OverviewChart from "../components/OverviewChart";
 import { AdminLogin } from "../components/AdminPage";
 import History from "../components/History";
 import ImportsTable from "../components/ImportsTable";
+import AIAssistant from "../components/AIAssisstant";
 
 const MainPage = () => {
   const [activeView, setActiveView] = useState("home");
@@ -73,8 +74,9 @@ const MainPage = () => {
                   )}
                   
                 </div>
+                  
 
-                
+                 
                 <div className="graph-chart">
                   <h2 style={{ color: 'var(--color-title)', padding: '20px 28px'}}>Graph</h2>
 

@@ -27,8 +27,17 @@ const rows = data.files.map(file => ({
         <tbody>
           {rows.map((row, index) => (
             <tr key={index}>
-              <td>{row.className}</td>
-              <td>{row.imports}</td>
+              
+              <td>
+                  <div className="cell-scroll">
+                    {row.className}
+                  </div>
+              </td>
+              <td>
+                  <div className="cell-scroll">
+                    {row.imports}
+                  </div>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -5,6 +5,7 @@ import Table from "../components/Table";
 import "../styles/Dashboard.css";
 import SingleFileBar from "../components/SingleFileBar";
 import FolderBar from "../components/FolderBar";
+import ImportsTable from "../components/ImportsTable";
 
 
 const Dashboard = ({ data }) => {
@@ -41,14 +42,15 @@ const Dashboard = ({ data }) => {
             <Card title="Total APIs" value={totalApis} />
         </div>
     
-        <div className="table-box">
-           <Table data={data}/>
+      <div className="table-box">
+          <Table data={data} />
+      </div>
+
+      <div className="table-import">
+          <ImportsTable data={data} />
         </div>
-
-
     
     <div className="bar-chart">
-      <h2 style={{ color: 'var(--color-title)', padding: '20px 22px'}}> Number of Lines</h2>
       { isSingleFile ? (
             <SingleFileBar file={files[0]} />
           ) : (

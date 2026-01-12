@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "../styles/Sidebar.css";
 import { FiHome, 
   FiFolder, 
@@ -9,6 +10,9 @@ import { FiHome,
   FiShield,
   FiMenu ,
   FiAlignJustify  } from "react-icons/fi";
+
+  import { IoMenu, IoClose } from "react-icons/io5";
+
 
 
 const menuItems = [
@@ -37,13 +41,57 @@ const menuItems = [
   }
 ];
 const Sidebar = ({ activeView, onSelect }) => {
+
+  const [open, setOpen] = useState(true) 
+
   return (
-    <aside className="sidebar-page">
+    <aside className={`sidebar-page ${open ? 'close' : 'open'}`}>
 
-      
-
+    <div className="sidebar-logo">
 
       {
+        open ? (
+      <span onClick={ () => setOpen(!open)} > <IoMenu/> </span>          
+        ) : (
+      <span onClick={ () => setOpen(!open)}> <IoClose   className="cross-logo"/> </span> 
+        )
+      }
+
+    </div>  
+
+    {
+
+        open ? (
+
+          
+        menuItems.map( (section, sIndex) => (
+          <div className="section-close" key={sIndex}>
+           {
+            section.items.map((item, i) => {
+
+              const Icon = item.icon;
+              const isActive = activeView === item.label.toLowerCase();
+
+              return(
+                <div className="menu-item-wrapper">
+                  <div key={i}
+                      className={`section-close-items ${isActive ? "active" : ""}`}
+                      onClick={() => onSelect(item.label.toLowerCase())}
+                  >
+                  <Icon size={20} style={{height: '36px', color: '#b19ef0'}}/>
+                  
+                  </div>
+                  <div className="item-menu-box">
+                    {item.label}
+                  </div>
+                </div>
+                
+                )
+              })}
+            </div> 
+        )) 
+      
+      ) : (
         menuItems.map( (section, sIndex) => (
           <div className="section" key={sIndex}>
            <p className="section-title"> {section.title}</p>
@@ -60,14 +108,17 @@ const Sidebar = ({ activeView, onSelect }) => {
                     onClick={() => onSelect(item.label.toLowerCase())}
                 >
                 <Icon style={{height: '13px', color: '#b19ef0'}}/>
-                <span >{item.label}</span>
+                <span className="menu-text" >{item.label}</span>
                 </div>
                 )
               })}
             </div> 
-        ))}   
+        ))
+
+      )
+        
+      } 
             
-  
         </aside>
   );
 }; 

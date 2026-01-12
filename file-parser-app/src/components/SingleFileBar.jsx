@@ -68,7 +68,8 @@ const SingleFileBar = ({ file }) => {
     };
 
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <>
+     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data} barCategoryGap={24}  barGap={8} >
         <XAxis
             dataKey="name"
@@ -83,7 +84,10 @@ const SingleFileBar = ({ file }) => {
         <Tooltip cursor={false} content={<CustomTooltip />} />
         <Bar dataKey="value"  barSize={38} fill="var(--color-button)" radius={[15,15,0,0]} />
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer> 
+    
+    </>
+  
   );
 };
 

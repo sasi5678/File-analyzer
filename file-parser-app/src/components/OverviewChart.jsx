@@ -96,6 +96,7 @@ const OverviewChart = ({ data }) => {
   const chartWidth = Math.max(chartData.length * 90, 600);
 
   return (
+    
     <ResponsiveContainer width={chartWidth} height={260}>
       <AreaChart
         data={chartData}

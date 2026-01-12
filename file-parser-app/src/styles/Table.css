@@ -17,6 +17,12 @@
   width: 80%;
 }
 
+.table td,
+.table th {
+  height: 70px;
+}
+
+
 .table th{
   padding: 25px 16px;
   font-weight: 600;
@@ -74,4 +80,21 @@
 .table th:nth-child(3),
 .table td:nth-child(3) {
   width: 20%;
+}
+
+
+.cell-scroll {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE / Edge */
+}
+
+/* Chrome / Safari */
+.cell-scroll::-webkit-scrollbar {
+  display: none;
 }

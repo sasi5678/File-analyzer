@@ -1,22 +1,30 @@
 .dashboard{
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: 3fr, 3fr;
   gap: 20px;
+  align-items: start;
 }
 
 .card-box{
   display: flex;
   flex-direction: column;
-  grid-column: 1/4;
+  grid-column: 1/auto;
 }
 
-.table-box{
+
+ .table-box{
   grid-column: 4/6;
-  grid-row: 1/10;
 }
+
+.table-import{
+  grid-column: 4/6;
+  grid-row: 2/4;
+}
+
+
 .bar-chart{
   grid-column: 1/4;
-  grid-row: 2/4;
+  grid-row: 2;
   padding: 10px;
   border: 1px solid var(--color-secondary-border);
   border-radius: 10px;
@@ -40,7 +48,7 @@
 
 .graph-chart{
   grid-column: 1/4;
-  grid-row: 5/8;
+  grid-row: 4;
   padding: 10px;
   border: 1px solid var(--color-secondary-border);
   border-radius: 10px;

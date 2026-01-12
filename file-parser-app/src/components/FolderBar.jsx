@@ -55,31 +55,38 @@ const FolderBar = ({ files }) => {
   };
 
   return (
-      <BarChart
-        width={data.length * 70}   // 🔥 dynamic width for scroll
-        height={350}
-        data={data}
-        barCategoryGap={24}        // 🔥 gap between categories
-        barGap={8}                 // 🔥 gap between bars
-      >
-        <XAxis
-          dataKey="name"
-          interval={0}
-          height={40}
-          tick={<WrappedTick />}
-          tickLine={false}
-          axisLine={{ stroke: "#2a2a35" }}
-        />
 
-        <Tooltip cursor={false} content={<CustomTooltip />} />
 
-        <Bar
-          dataKey="lines"          // ✅ FIXED
-          barSize={22}             // 🔥 slimmer bars
-          fill="var(--color-button)"
-          radius={[12, 12, 0, 0]}
-        />
-      </BarChart>
+    <>
+    
+          <BarChart
+          width={data.length * 70}   // 🔥 dynamic width for scroll
+          height={350}
+          data={data}
+          barCategoryGap={24}        // 🔥 gap between categories
+          barGap={8}                 // 🔥 gap between bars
+        >
+          <XAxis
+            dataKey="name"
+            interval={0}
+            height={40}
+            tick={<WrappedTick />}
+            tickLine={false}
+            axisLine={{ stroke: "#2a2a35" }}
+          />
+
+          <Tooltip cursor={false} content={<CustomTooltip />} />
+
+          <Bar
+            dataKey="lines"          // ✅ FIXED
+            barSize={22}             // 🔥 slimmer bars
+            fill="var(--color-button)"
+            radius={[12, 12, 0, 0]}
+          />
+        </BarChart> 
+    
+    </>
+
   );
 };
 

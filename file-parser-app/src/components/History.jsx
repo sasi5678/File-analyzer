@@ -46,7 +46,7 @@ useEffect(() => {
   return (
 
     <>
-
+    <h2 style={{ fontSize: "32px", marginBottom: "10px"}}> HISTORY</h2>
     <div className="table-wrapper">
       <table className="history-table" >
         <thead>
