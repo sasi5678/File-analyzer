@@ -4,6 +4,9 @@ import axios from "axios";
 
 const History = () => {
 
+
+  const API_URL = import.meta.env.VITE_API_URL;
+  
   const [history, setHistory] = useState([])
 
   const token = localStorage.getItem("token");
@@ -13,7 +16,7 @@ useEffect(() => {
   const fetchHistory = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/api/auth/history",
+        `${API_URL}/api/auth/history`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

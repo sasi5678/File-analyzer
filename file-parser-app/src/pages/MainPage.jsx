@@ -12,14 +12,13 @@ import OverviewChart from "../components/OverviewChart";
 import { AdminLogin } from "../components/AdminPage";
 import History from "../components/History";
 import ImportsTable from "../components/ImportsTable";
-import AIAssistant from "../components/AIAssisstant";
 
 const MainPage = () => {
   const [activeView, setActiveView] = useState("home");
   const [analysisData, setAnalysisData] = useState(null);
 
-   const isSingleFile = analysisData?.totalFiles === 1;
-    const files = analysisData?.files || [];
+  const isSingleFile = analysisData?.totalFiles === 1;
+  const files = analysisData?.files || [];
 
   return (
     <div className="app">
@@ -33,62 +32,64 @@ const MainPage = () => {
         {/* SCROLLABLE CENTER */}
         <main className="main">
           {activeView === "home" && (<Home
-              onAnalyze={(data) => {
-                setAnalysisData(data);      // ✅ store data
-                setActiveView("dashboard"); // ✅ auto navigate
-              }}
-            />
-           )}
+            onAnalyze={(data) => {
+              setAnalysisData(data);      // ✅ store data
+              setActiveView("dashboard"); // ✅ auto navigate
+            }}
+          />
+          )}
 
           {activeView === "dashboard" && analysisData && (<Dashboard data={analysisData} />
-        )}
+          )}
 
-        { 
-          activeView === "admin" && (<AdminLogin/>)
-        }
-
-        {
-          activeView === "import" && (<ImportsTable data={analysisData} />)
-        }
-
-        { 
-          activeView === "history" && (<History />)
-        }
-          {activeView === "table" && <>
-          <div className="table-box">
-              <h1 className="table-heading">Table</h1>
-            <Table data={analysisData}/>
-            </div>
-            </>
+          {
+            activeView === "admin" && (<AdminLogin />)
           }
-          
-          {activeView === "graph" && <div style={{padding: '50px 80px 50px 50px', display: "flex", 
-            flexDirection: "column", justifyContent: " space-evenly", gap: "30px"}}>
 
-                  <div className="bar-chart">
-                  <h2 style={{ color: 'var(--color-title)', padding: '20px 22px'}}> Number of Lines</h2>
-                  { isSingleFile ? (
-                        <SingleFileBar file={files[0]} />
-                      ) : (
-                        <FolderBar files={files} />
-                  )}
-                  
-                </div>
-                  
+          {
+            activeView === "import" && (<ImportsTable data={analysisData} />)
+          }
 
-                 
-                <div className="graph-chart">
-                  <h2 style={{ color: 'var(--color-title)', padding: '20px 28px'}}>Graph</h2>
+          {
+            activeView === "history" && (<History />)
+          }
+          {activeView === "table" && <>
+            <div className="table-box">
+              <h1 className="table-heading">Table</h1>
+              <Table data={analysisData} />
+            </div>
+          </>
+          }
 
-                  { isSingleFile ? (
-                        <OverviewChart data={files[0]} />
-                      ) : (
-                        <OverviewChart data={files} />
-                  )}
-                  
-                </div>
-                      
-          
+          {activeView === "graph" && <div style={{
+            padding: '50px 80px 50px 50px', display: "flex",
+            flexDirection: "column", justifyContent: " space-evenly", gap: "30px"
+          }}>
+
+            <div className="bar-chart">
+              <h2 style={{ color: 'var(--color-title)', padding: '20px 22px' }}> Number of Lines</h2>
+              {isSingleFile ? (
+                <SingleFileBar file={files[0]} />
+              ) : (
+                <FolderBar files={files} />
+              )}
+
+            </div>
+
+
+
+            <div className="graph-chart">
+              <h2 style={{ color: 'var(--color-title)', padding: '20px 28px' }}>Graph</h2>
+
+              {isSingleFile ? (
+                <OverviewChart data={files[0]} />
+              ) : (
+                <OverviewChart data={files} />
+              )}
+
+            </div>
+
+
           </div>}
         </main>
       </div>

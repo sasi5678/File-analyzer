@@ -3,11 +3,9 @@ import '../styles/Home.css'
 
 const Home = ({onAnalyze}) => {
 
-
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const name = localStorage.getItem('username')
-
-  const token = localStorage.getItem("token");
 
   const handleUpload = async (e) => {
 
@@ -24,7 +22,7 @@ const Home = ({onAnalyze}) => {
       
 
      const res = await axios.post(
-          "http://localhost:8080/analyze",
+          `${API_URL}/analyze`,
           formData,
           {
             headers: {

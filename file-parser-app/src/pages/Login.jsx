@@ -8,6 +8,9 @@ import "../styles/Login.css";
 
 const strengthLabels = ["weak", "medium", "medium", "strong"];
 
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 const PasswordStrength = ({ onChange, error,isLogin }) => {
   const [strength, setStrength] = useState("");
 
@@ -86,36 +89,36 @@ const AuthPage = () => {
 
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const url = isLogin
-      ? "http://localhost:8080/api/auth/login"
-      : "http://localhost:8080/api/auth/register";
+  const url = isLogin
+    ? `${API_URL}/api/auth/login`
+    : `${API_URL}/api/auth/register`;
 
-    try {
+  try {
+    const payload = isLogin
+      ? { username, password }
+      : { email, username, password };
 
-       const payload = isLogin
-      ? { username, password }               // LOGIN
-      : { email, username, password };  
+    const res = await axios.post(url, payload);
 
-       const res = await axios.post(url, payload);
+    const token = res.data.token;     // ✅ get token
+    localStorage.setItem("token", token); // ✅ store token
+    localStorage.setItem("username", username);
 
-       console.log("login res: ", res.data)
+    console.log("Token saved:", token);
 
-      localStorage.setItem("token", res.data.token);
+    alert(isLogin ? "Login successful" : "Registration successful");
+    navigate("/main");
 
-
-      localStorage.setItem("username", username);
-
-      alert(isLogin ? "Login successful" : "Registration successful");
-      navigate("/main");
-    } catch (err) {
-
-      isLogin ?  "" : alert("Username already exists");
-      
-      setError(() => "Invalid Username or Password.")
+  } catch (err) {
+    if (!isLogin) {
+      alert("Username already exists");
+    }
+    setError("Invalid Username or Password.");
   }
 };
+
 
   return (
     <section className="page password-strength-page">
